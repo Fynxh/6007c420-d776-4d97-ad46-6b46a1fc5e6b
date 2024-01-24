@@ -49,7 +49,6 @@ export class AuthService {
   async login(user: IRequestUser) {
     const { email, userId, role, refreshToken } = user;
     const payload: IJwtPayload = { sub: userId, email, role, refreshToken };
-    console.log('PAYLOAD', payload);
     const token = this.generateToken({
       payload,
       secret: JWT_SECRET,
@@ -87,6 +86,10 @@ export class AuthService {
     if (!isRefreshTokenMatch) {
       throw new ForbiddenException();
     }
+  }
+
+  async logout(userId: string) {
+    await this.userService.updateById(userId, { refreshToken: null });
   }
 
   private validatePassword(data: ICompare) {

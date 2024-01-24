@@ -6,6 +6,7 @@ import { LocalAuthGuard } from '../../../commons/guards/local-auth.guard';
 import { LoginDto } from '../dtos/login.dto';
 import { Public } from '../../../commons/decorators/public.decorator';
 import { JwtRefreshGuard } from '../../../commons/guards/jwt-refresh.guard';
+import { IUserAuthInfoRequest } from '../../../commons/interfaces/request-user.interface';
 
 @Controller('auth')
 @ApiTags('Authentication Services')
@@ -34,5 +35,13 @@ export class AuthController {
   @UseGuards(JwtRefreshGuard)
   async getRefresh(@Req() req) {
     return await this.authService.login(req.user);
+  }
+
+  @Get('logout')
+  @ApiOperation({ summary: 'Logout' })
+  @ApiBearerAuth()
+  async logout(@Req() req: IUserAuthInfoRequest) {
+    const { userId } = req.user;
+    return await this.authService.logout(userId);
   }
 }
