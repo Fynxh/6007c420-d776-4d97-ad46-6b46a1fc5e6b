@@ -36,12 +36,12 @@ export class AuthService {
   }
 
   async login(user: IRequestUser) {
-    const { email, userId } = user;
-    const jwtPayload = { sub: userId, email };
+    const { email, userId, role } = user;
+    const jwtPayload = { sub: userId, email, role };
 
     const token = this.jwtService.sign(jwtPayload);
 
-    return { token };
+    return { token, role };
   }
 
   private validatePassword(data: ICompare) {
