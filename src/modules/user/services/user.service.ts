@@ -28,9 +28,24 @@ export class UserService {
     });
   }
 
+  async findOneById(id: string): Promise<User | null> {
+    return await this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
+  }
+
   async delete(id: string) {
     return await this.prisma.user.delete({
       where: { id },
+    });
+  }
+
+  async updateById(id: string, data: Prisma.UserUpdateInput): Promise<User> {
+    return await this.prisma.user.update({
+      where: { id },
+      data,
     });
   }
 }

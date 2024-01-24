@@ -6,10 +6,17 @@ import { PasswordService } from '../../commons/services/password.service';
 import { LocalStrategy } from '../../commons/strategies/local.strategy';
 import { JwtConfig } from '../../configs/jwt/jwt.config';
 import { JwtStrategy } from '../../commons/strategies/jwt.strategy';
+import { JwtRefreshStrategy } from '../../commons/strategies/jwt-refresh.strategy';
 
 @Module({
   imports: [JwtConfig.register(), UserModule],
-  providers: [AuthService, PasswordService, LocalStrategy, JwtStrategy],
+  providers: [
+    AuthService,
+    PasswordService,
+    LocalStrategy,
+    JwtStrategy,
+    JwtRefreshStrategy,
+  ],
   controllers: [AuthController],
 })
 export class AuthModule {}

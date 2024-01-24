@@ -1,9 +1,10 @@
-import { UserRole } from '../../modules/user/enums/user-role.enum';
+import { $Enums } from '@prisma/client';
 
 export interface IRequestUser {
   userId: string;
   email: string;
-  role: UserRole;
+  role: $Enums.Role;
+  refreshToken: string;
 }
 
 export interface IUserAuthInfoRequest extends Request {

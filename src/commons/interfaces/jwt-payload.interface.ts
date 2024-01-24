@@ -1,7 +1,8 @@
-import { UserRole } from '../../modules/user/enums/user-role.enum';
+import { $Enums } from '@prisma/client';
 
 export interface IJwtPayload {
   sub: string;
   email: string;
-  role: UserRole;
+  role: $Enums.Role;
+  refreshToken: string;
 }
