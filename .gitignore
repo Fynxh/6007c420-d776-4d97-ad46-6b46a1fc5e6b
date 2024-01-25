@@ -40,3 +40,5 @@ lerna-debug.log*
 .env-test
 env-dev.txt
 env-test.txt
+
+/pgdata

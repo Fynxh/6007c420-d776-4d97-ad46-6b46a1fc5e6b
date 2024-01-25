@@ -74,7 +74,7 @@ export class AuthService {
     const { userId, refreshToken } = data;
     const user = await this.userService.findOneById(userId);
 
-    if (!user || !user.refreshToken) {
+    if (!user?.refreshToken) {
       throw new ForbiddenException();
     }
 
