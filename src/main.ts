@@ -5,6 +5,7 @@ import { SwaggerConfig } from './configs/swagger/swagger.config';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
 import * as compression from 'compression';
+import { ResponseInterceptor } from './commons/interceptors/response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -29,6 +30,8 @@ async function bootstrap() {
       transformOptions: { enableImplicitConversion: true },
     }),
   );
+
+  app.useGlobalInterceptors(new ResponseInterceptor());
 
   setupSwagger(app, config);
 
