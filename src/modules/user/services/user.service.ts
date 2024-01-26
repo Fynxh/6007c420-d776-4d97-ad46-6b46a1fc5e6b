@@ -28,12 +28,20 @@ export class UserService {
     });
   }
 
-  async findOneById(id: string): Promise<User | null> {
+  async findOneById(
+    id: string,
+    selectOptions?: Prisma.UserSelect,
+  ): Promise<User | null> {
     return await this.prisma.user.findUnique({
       where: {
         id,
       },
+      select: selectOptions,
     });
+  }
+
+  async findAll(): Promise<User[]> {
+    return await this.prisma.user.findMany();
   }
 
   async delete(id: string) {
